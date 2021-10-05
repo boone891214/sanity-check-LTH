@@ -22,7 +22,7 @@ Other required dependency: `numpy`, `pyyaml`, `matplotlib`, `tensorboardX`, `ope
 
 We prune globally. The layers that are considered "global" is defined in the corresponding `.yaml` files. Once we prune globally, 
 the sparsity ratio in the `.yaml` file will be override by the global sparsity.
-There are four necessary settings for the LTH experimens (using resnet-20 as example):
+There are five necessary settings for the LTH experimens (using resnet-20 as example):
 
 - pretraining
 
@@ -42,7 +42,7 @@ There are four necessary settings for the LTH experimens (using resnet-20 as exa
     
     ```
       cd scripts/resnet20/iterative_pruning_lth_setting
-      python run_iterative_lth_lr0.1.py
+      python run_imp_lr0.1.py
     ```
 
 - oneshot pruning + retraining (essentially the so called lr-rewinding technique)
@@ -51,7 +51,7 @@ There are four necessary settings for the LTH experimens (using resnet-20 as exa
     
     ```
       cd scripts/resnet20/oneshot_pruning_retraining
-      bash run_oneshot_lr_0.1.sh
+      bash run_prune_lr_0.1.sh
     ```
 
 
@@ -65,7 +65,7 @@ There are four necessary settings for the LTH experimens (using resnet-20 as exa
     
     ```
       cd scripts/resnet20/oneshot_pruning_lth_setting
-      bash run_winning_lr_0.1.sh
+      bash run_omp_lr_0.1.sh
     ```
 
 
@@ -97,6 +97,45 @@ We have pre-built the ready-to-run nvidia-docker image [here](https://drive.goog
   
     `nvidia-docker run --rm -it -v /path/to/your/imagenet/:/data/imagenet -v /path/to/your/project:/workspace/rn50 --ipc=host nvidia_rn50`
 
+
+## Main pipeline
+
+Similar with CIFAR experiments, there are five necessary settings for the LTH experimens (using resnet-50 as example):
+
+- pretraining
+    
+    ```
+      cd scripts/LTH/resnet50/pretraining
+      bash run.sh
+    ```
+
+- iterative magnitude-based pruning (`LT-IMP`)
+    
+    ```
+      cd scripts/LTH/resnet50/iterative_pruning_lth_setting
+      python run_imp.py
+    ```
+
+- oneshot pruning + retraining (essentially the so called lr-rewinding technique)
+- 
+    ```
+      cd scripts/LTH/resnet50/oneshot_pruning_retraining
+      bash run_prune.sh
+    ```
+
+
+- oneshot magnitude-based pruning (`LT-OMP`)
+   
+    ```
+      cd scripts/LTH/resnet50/oneshot_pruning_lth_setting
+      bash run_omp.sh
+    ```
+
+
+- ramdom re-initialization (`RR-IMP/OMP`)
+   
+    - For `RR-OMP`, similar to the scripts of `LT-OMP`, with different seed (or load different weights). For `RR-IMP`, change the seed
+      and mask model path of `--sp-pre-defined-mask-dir` to your `LT-IMP` checkpoints.
 
 
 
