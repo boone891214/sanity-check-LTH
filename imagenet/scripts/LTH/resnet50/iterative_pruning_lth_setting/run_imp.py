@@ -55,7 +55,7 @@ load_weight_path = "xxxx" # for lottery ticket initialization, load init weight 
 
 total_round = 12
 
-for round in range(7, total_round):
+for round in range(1, total_round):
     ''' the main code use round value to determine sparsity ratio to prune AFTER each retraining step '''
 
     # define current workspace folder name
