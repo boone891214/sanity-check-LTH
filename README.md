@@ -139,3 +139,16 @@ Similar with CIFAR experiments, there are five necessary settings for the LTH ex
 
 
 
+
+
+# Citation
+if you find this repo is helpful, please cite
+```
+@article{ma2021sanity,
+  title={Sanity Checks for Lottery Tickets: Does Your Winning Ticket Really Win the Jackpot?},
+  author={Ma, Xiaolong and Yuan, Geng and Shen, Xuan and Chen, Tianlong and Chen, Xuxi and Chen, Xiaohan and Liu, Ning and Qin, Minghai and Liu, Sijia and Wang, Zhangyang and others},
+  journal={arXiv preprint arXiv:2107.00166},
+  year={2021}
+}
+```
+
