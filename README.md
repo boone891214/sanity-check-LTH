@@ -1,5 +1,6 @@
 # Sanity Checks for Lottery Tickets: Does Your Winning Ticket Really Win the Jackpot?
-simple version of using prune_utils for dynamic sparse training and lottery ticket hypothesis
+Sample code use for NeurIPS 2021 paper:
+[Sanity Checks for Lottery Tickets: Does Your Winning Ticket Really Win the Jackpot?](https://arxiv.org/abs/2107.00166)
 
 
 
@@ -32,7 +33,7 @@ There are four necessary settings for the LTH experimens (using resnet-20 as exa
       bash run.sh
     ```
 
-- iterative magnitude-based pruning (`IMP`)
+- iterative magnitude-based pruning (`LT-IMP`)
 
     - Prune model iteratively. At each round the initial weights are rewind to the same initial point as pretraining. In this case, 
       specify the same `seed` used in the pretraining, which will give you the same initialization. You can also `--resume` a 
@@ -54,10 +55,12 @@ There are four necessary settings for the LTH experimens (using resnet-20 as exa
     ```
 
 
-- oneshot magnitude-based pruning (`OMP`)
-    
+- oneshot magnitude-based pruning (`LT-OMP`)
+   
+    - Must run oneshot pruning + retraining for 1 epochs to obtain the model with `OMP` masks.
+   
     - This setting is different from "oneshot pruning + retraining". In "oneshot pruning + retraining", the sparse weights are continuously trained 
-      from pretrained value (no rewinding), while in `OMP`, the LTH setting is: 1) using the mask obtained from oneshot pruning on the 
+      from pretrained value (lr-rewinding), while in `OMP`, the LTH setting is: 1) using the mask obtained from oneshot pruning on the 
       pretrained model, and 2) using the same **initial** weights as pretraining for the sparse weight training.
     
     ```
@@ -65,12 +68,20 @@ There are four necessary settings for the LTH experimens (using resnet-20 as exa
       bash run_winning_lr_0.1.sh
     ```
 
+
+- ramdom re-initialization (`RR-IMP/OMP`)
+   
+    - For `RR-OMP`, similar to the scripts of `LT-OMP`, with different seed (or load different weights). For `RR-IMP`, change the seed
+      and mask model path of `--sp-pre-defined-mask-dir` to your `LT-IMP` checkpoints.
+
+
+
 # ImageNet-1k
 
 ## Requirements
 
-For easy implementation, we suggest to use [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) for the running environments.
-We have pre-built the ready-to-run nvidia-docker image here.
+For easy implementation, we suggest to use [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) with CUDA-11 for the training environments.
+We have pre-built the ready-to-run nvidia-docker image [here](https://drive.google.com/file/d/1kEXD8ZHXEoHIMSpAFKaKZh2SExoWHONy/view?usp=sharing).
 
 - Load pre-built docker images (download or build): 
   
