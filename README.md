@@ -147,7 +147,8 @@ if you find this repo is helpful, please cite
 @article{ma2021sanity,
   title={Sanity Checks for Lottery Tickets: Does Your Winning Ticket Really Win the Jackpot?},
   author={Ma, Xiaolong and Yuan, Geng and Shen, Xuan and Chen, Tianlong and Chen, Xuxi and Chen, Xiaohan and Liu, Ning and Qin, Minghai and Liu, Sijia and Wang, Zhangyang and others},
-  journal={arXiv preprint arXiv:2107.00166},
+  journal={Advances in Neural Information Processing Systems},
+  volume={34},
   year={2021}
 }
 ```
